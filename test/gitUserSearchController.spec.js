@@ -13,6 +13,16 @@ describe("GitUserSearchController", function() {
   });
 
   describe("when searching for a user", function() {
+    var httpBackend;
+    beforeEach(inject(function($httpBackend) {
+      httpBackend = $httpBackend;
+      httpBackend
+        .when("GET", "https://api.github.com/search/users?access_token=16a14aa440f71ea6928510feef4440d8b658a250&q=tansaku")
+        .respond(
+          { items: items }
+        );
+    }));
+
     var items = [
       {
         "login": "tansaku",
@@ -27,8 +37,9 @@ describe("GitUserSearchController", function() {
     ];
 
     it("displays search results", function() {
-      ctrl.searchTerm = "hello";
+      ctrl.searchTerm = "tansaku";
       ctrl.doSearch();
+      httpBackend.flush();
       expect(ctrl.searchResult.items).toEqual(items);
     });
   });
