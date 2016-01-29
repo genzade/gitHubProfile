@@ -21,7 +21,7 @@
       </form>
       <p ng-hide="searchCtrl.searchTerm === nil" ng-model="searchCtrl.searchTerm"><i>Displaying results for <strong>{{ searchCtrl.searchTerm }}</strong></i></p>
       <ul class="list-group">
-        <li ng-repeat="user in searchCtrl.searchResult.items">
+        <li ng-hide="searchCtrl.searchTerm === nil" ng-repeat="user in searchCtrl.searchResult.items">
           <img ng-src="{{user.avatar_url}}&s=50" width="50">
           <a ng-href="{{user.html_url}}">{{user.login}}</a>
         </li>
